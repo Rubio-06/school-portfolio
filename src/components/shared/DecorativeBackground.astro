@@ -1,0 +1,52 @@
+---
+// Composant pour le background décoratif avec effets parallax
+---
+
+<div
+  class="fixed inset-0 -z-10 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900"
+>
+  <!-- Decorative background elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div
+      data-bg-decoration
+      class="absolute -top-20 -left-20 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl"
+    >
+    </div>
+    <div
+      data-bg-decoration
+      class="absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-purple-500/10 blur-3xl"
+    >
+    </div>
+    <div
+      data-bg-decoration
+      class="absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pink-500/5 blur-3xl"
+    >
+    </div>
+  </div>
+
+  <!-- Grid pattern overlay -->
+  <div
+    class="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.02)_1px,transparent_1px)] bg-[size:50px_50px]"
+  >
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+
+  // Parallax effect on mouse move
+  document.addEventListener("mousemove", (e: MouseEvent) => {
+    const { clientX, clientY } = e;
+    const { innerWidth, innerHeight } = window;
+
+    const xPos = (clientX / innerWidth - 0.5) * 20;
+    const yPos = (clientY / innerHeight - 0.5) * 20;
+
+    gsap.to("[data-bg-decoration]", {
+      x: xPos,
+      y: yPos,
+      duration: 0.5,
+      ease: "power2.out",
+    });
+  });
+</script>

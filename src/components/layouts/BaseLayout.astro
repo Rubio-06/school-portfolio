@@ -3,14 +3,16 @@ import "@styles/global.css";
 
 import Head from "@shared/Head.astro";
 import Header from "@shared/Header.astro";
+import DecorativeBackground from "@shared/DecorativeBackground.astro";
 ---
 
 <!doctype html>
 <html lang="en">
   <Head />
-  <body class="h-screen bg-linear-to-bl from-blue-950 to-gray-900">
+  <body class="min-h-screen">
+    <DecorativeBackground />
     <Header />
-    <main class="container p-4">
+    <main>
       <slot />
     </main>
   </body>
