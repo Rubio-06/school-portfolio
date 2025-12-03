@@ -1,18 +1,16 @@
 ---
 import "@styles/global.css";
-import { ClientRouter } from "astro:transitions";
+
+import Head from "@shared/Head.astro";
+import Header from "@shared/Header.astro";
 ---
 
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <ClientRouter />
-  </head>
-  <body>
-    <main>
+  <Head />
+  <body class="h-screen bg-linear-to-bl from-blue-950 to-gray-900">
+    <Header />
+    <main class="container p-4">
       <slot />
     </main>
   </body>

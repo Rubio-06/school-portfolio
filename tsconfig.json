@@ -8,6 +8,9 @@
       "@layouts/*": ["src/components/layouts/*"],
       "@shared/*": ["src/components/shared/*"],
       "@ui/*": ["src/components/ui/*"],
+      "@core/*": ["src/core/*"],
+      "@config/*": ["src/core/config/*"],
+      "@/types/*": ["src/core/types/*"],
       "@utils/*": ["src/utils/*"],
       "@styles/*": ["src/styles/*"]
     }

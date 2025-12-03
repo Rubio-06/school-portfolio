@@ -1,0 +1,21 @@
+---
+import Link from "@ui/Link.astro";
+import { socials } from "@config/social";
+---
+
+<ul class="flex space-x-4">
+  {
+    socials.map((social) => {
+      const Icon = social.icon;
+      return (
+        <li>
+          <Link href={social.link} target="_blank" rel="noopener noreferrer">
+            <div data-social-icon>
+              <Icon class="h-8 w-8 fill-white" />
+            </div>
+          </Link>
+        </li>
+      );
+    })
+  }
+</ul>

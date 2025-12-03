@@ -1,0 +1,13 @@
+---
+interface LinkProps {
+  href: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  text: string;
+}
+
+const { href, target = "_self" } = Astro.props;
+---
+
+<a href={href} target={target} class="text-white hover:underline">
+  <slot />
+</a>

@@ -1,8 +1,8 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
-import tailwindcss from '@tailwindcss/vite';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { defineConfig } from "astro/config";
+import tailwindcss from "@tailwindcss/vite";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -12,13 +12,16 @@ export default defineConfig({
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, './src'),
-        '@components': path.resolve(__dirname, './src/components'),
-        '@layouts': path.resolve(__dirname, './src/components/layouts'),
-        '@shared': path.resolve(__dirname, './src/components/shared'),
-        '@ui': path.resolve(__dirname, './src/components/ui'),
-        '@utils': path.resolve(__dirname, './src/utils'),
-        '@styles': path.resolve(__dirname, './src/styles'),
+        "@": path.resolve(__dirname, "./src"),
+        "@components": path.resolve(__dirname, "./src/components"),
+        "@layouts": path.resolve(__dirname, "./src/components/layouts"),
+        "@shared": path.resolve(__dirname, "./src/components/shared"),
+        "@ui": path.resolve(__dirname, "./src/components/ui"),
+        "@core": path.resolve(__dirname, "./src/core"),
+        "@config": path.resolve(__dirname, "./src/core/config"),
+        "@/types": path.resolve(__dirname, "./src/core/types"),
+        "@utils": path.resolve(__dirname, "./src/utils"),
+        "@styles": path.resolve(__dirname, "./src/styles"),
       },
     },
   },
