@@ -12,7 +12,9 @@
       "@config/*": ["src/core/config/*"],
       "@/types/*": ["src/core/types/*"],
       "@utils/*": ["src/utils/*"],
-      "@styles/*": ["src/styles/*"]
+      "@styles/*": ["src/styles/*"],
+      "@scripts/*": ["src/scripts/*"],
+      "@animations/*": ["src/scripts/animations/*"]
     }
   },
   "include": [".astro/types.d.ts", "**/*"],
