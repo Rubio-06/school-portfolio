@@ -18,9 +18,9 @@ const {
   size = "md",
   download = false,
   class: className = "",
-} = Astro.props;
+} = Astro.props as LinkProps;
 
-const variantClasses: Record<LinkVariant, string> = {
+const variantClasses = {
   primary:
     "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-gradient-to-r from-blue-500 to-purple-500 font-semibold text-white shadow-lg shadow-blue-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/50 hover:scale-105",
   secondary:
@@ -30,16 +30,24 @@ const variantClasses: Record<LinkVariant, string> = {
   icon: "group inline-flex items-center justify-center text-gray-400 transition-all duration-300 hover:text-white hover:scale-110",
 };
 
-const sizeClasses: Record<LinkSize, string> = {
+const sizeClasses = {
   sm: "px-6 py-2 text-sm",
   md: "px-8 py-4 text-base",
   lg: "px-10 py-5 text-lg",
 };
 
+const getVariantClass = (v: LinkVariant): string => {
+  return variantClasses[v];
+};
+
+const getSizeClass = (s: LinkSize): string => {
+  return sizeClasses[s];
+};
+
 const linkClasses =
   variant === "icon"
-    ? `${variantClasses[variant]} ${className}`
-    : `${variantClasses[variant]} ${sizeClasses[size]} ${className}`;
+    ? `${getVariantClass(variant)} ${className}`
+    : `${getVariantClass(variant)} ${getSizeClass(size)} ${className}`;
 ---
 
 <a href={href} target={target} download={download} data-link class={linkClasses}>
