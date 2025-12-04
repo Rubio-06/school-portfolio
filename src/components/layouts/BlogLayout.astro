@@ -1,0 +1,177 @@
+---
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "./BaseLayout.astro";
+import Link from "@/components/ui/Link.astro";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { title, description, date, category, tags, author } = post.data;
+const { Content } = await post.render();
+
+// Calculer le temps de lecture
+const readingTime = Math.ceil(post.body.split(/\s+/).length / 200);
+
+// Formater la date
+const formattedDate = new Intl.DateTimeFormat("fr-FR", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+}).format(date);
+
+// Couleurs par catégorie
+const categoryColors = {
+  framework: "text-blue-400",
+  performance: "text-green-400",
+  architecture: "text-purple-400",
+  tooling: "text-orange-400",
+  "best-practices": "text-pink-400",
+};
+
+const categoryGradients = {
+  framework: "from-blue-500/20 to-blue-600/20 border-blue-500/30",
+  performance: "from-green-500/20 to-green-600/20 border-green-500/30",
+  architecture: "from-purple-500/20 to-purple-600/20 border-purple-500/30",
+  tooling: "from-orange-500/20 to-orange-600/20 border-orange-500/30",
+  "best-practices": "from-pink-500/20 to-pink-600/20 border-pink-500/30",
+};
+
+const tagGradients = {
+  framework:
+    "from-blue-400/10 to-blue-500/5 border-blue-400/30 hover:from-blue-400/20 hover:to-blue-500/10",
+  performance:
+    "from-green-400/10 to-green-500/5 border-green-400/30 hover:from-green-400/20 hover:to-green-500/10",
+  architecture:
+    "from-purple-400/10 to-purple-500/5 border-purple-400/30 hover:from-purple-400/20 hover:to-purple-500/10",
+  tooling:
+    "from-orange-400/10 to-orange-500/5 border-orange-400/30 hover:from-orange-400/20 hover:to-orange-500/10",
+  "best-practices":
+    "from-pink-400/10 to-pink-500/5 border-pink-400/30 hover:from-pink-400/20 hover:to-pink-500/10",
+};
+
+const categoryLabels = {
+  framework: "Framework",
+  performance: "Performance",
+  architecture: "Architecture",
+  tooling: "Outillage",
+  "best-practices": "Bonnes Pratiques",
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="container mx-auto max-w-5xl px-4 py-16">
+    <!-- Breadcrumb -->
+    <nav class="mb-6 flex items-center gap-2 text-sm text-gray-400">
+      <a href="/" class="transition-colors hover:text-white">Accueil</a>
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
+        ></path>
+      </svg>
+      <a href="/blog" class="transition-colors hover:text-white">Veille</a>
+      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"
+        ></path>
+      </svg>
+      <span class="text-gray-500">{title}</span>
+    </nav>
+
+    <!-- Header de l'article -->
+    <header class="mb-16">
+      <!-- Catégorie -->
+      <div class="mb-6">
+        <span
+          class={`inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full border backdrop-blur-md bg-gradient-to-r ${categoryGradients[category]}`}
+        >
+          <span class={`w-2 h-2 rounded-full ${categoryColors[category].replace("text-", "bg-")}`}
+          ></span>
+          <span class={categoryColors[category]}>
+            {categoryLabels[category]}
+          </span>
+        </span>
+      </div>
+
+      <!-- Titre -->
+      <h1
+        class="mb-6 bg-gradient-to-r from-white via-gray-100 to-gray-400 bg-clip-text text-5xl leading-tight font-bold text-transparent md:text-6xl lg:text-7xl"
+      >
+        {title}
+      </h1>
+
+      <!-- Description -->
+      <p class="mb-8 max-w-3xl text-xl leading-relaxed text-gray-400 md:text-2xl">
+        {description}
+      </p>
+
+      <!-- Métadonnées -->
+      <div class="mb-8 flex flex-wrap items-center gap-6">
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+          </svg>
+          <span>{author}</span>
+        </div>
+
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            ></path>
+          </svg>
+          <time datetime={date.toISOString()}>{formattedDate}</time>
+        </div>
+
+        <div class="flex items-center gap-2 text-sm text-gray-500">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span>{readingTime} min de lecture</span>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="mb-10 flex flex-wrap gap-3">
+        {
+          tags.map((tag) => (
+            <span
+              class={`rounded-full border bg-gradient-to-r px-4 py-2 text-sm font-medium text-white backdrop-blur-md transition-all duration-300 ${tagGradients[category]}`}
+            >
+              #{tag}
+            </span>
+          ))
+        }
+      </div>
+    </header>
+
+    <!-- Contenu Markdown -->
+    <div class="markdown-content space-y-6">
+      <Content />
+    </div>
+
+    <!-- Bouton retour -->
+    <div class="mt-16">
+      <Link href="/blog" variant="ghost" size="md">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Retour aux articles
+      </Link>
+    </div>
+  </div>
+</BaseLayout>

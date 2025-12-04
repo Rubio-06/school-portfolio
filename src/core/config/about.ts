@@ -5,7 +5,7 @@ export const aboutConfig: AboutConfig = {
   lastName: "Abela",
   age: 20,
   location: "France",
-  email: "rubio.abela@example.com",
+  email: "contact@rubio-abela.fr",
   title: "Développeur Full Stack",
   description: [
     "Étudiant passionné en BTS SIO (Services Informatiques aux Organisations), option SLAM, je me spécialise dans le développement web moderne et les technologies JavaScript/TypeScript.",
@@ -14,22 +14,22 @@ export const aboutConfig: AboutConfig = {
   ],
   highlights: [
     {
-      icon: "🎓",
+      icon: "",
       label: "Formation",
       value: "BTS SIO - SLAM",
     },
     {
-      icon: "💼",
+      icon: "",
       label: "Statut",
       value: "En alternance",
     },
     {
-      icon: "📍",
+      icon: "",
       label: "Localisation",
       value: "France",
     },
     {
-      icon: "💻",
+      icon: "",
       label: "Expérience",
       value: "4+ ans",
     },

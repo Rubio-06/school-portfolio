@@ -1,0 +1,180 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/components/layouts/BaseLayout.astro";
+import BlogCard from "@/components/ui/BlogCard.astro";
+import Title from "@/components/ui/Title.astro";
+
+// Récupérer tous les articles publiés
+const allPosts = await getCollection("blog", ({ data }) => {
+  return data.draft !== true;
+});
+
+// Trier par date (plus récent en premier)
+const sortedPosts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// Récupérer tous les tags uniques
+const allTags = [...new Set(sortedPosts.flatMap((post) => post.data.tags))];
+
+// Récupérer toutes les catégories
+const categories = [
+  { id: "framework", label: "Framework" },
+  { id: "performance", label: "Performance" },
+  { id: "architecture", label: "Architecture" },
+  { id: "tooling", label: "Outillage" },
+  { id: "best-practices", label: "Bonnes Pratiques" },
+];
+---
+
+<BaseLayout
+  title="Blog - Veille Technologique"
+  description="Explorez mes articles sur Astro, les technologies web modernes et les bonnes pratiques de développement."
+>
+  <div class="container mx-auto px-4 py-16">
+    <!-- En-tête -->
+    <div class="mb-16">
+      <Title subtitle="Ma veille technologique" title="Blog" />
+      <p class="mt-6 max-w-2xl text-xl text-gray-400">
+        Articles et réflexions sur Astro et l'écosystème web moderne
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-12 lg:flex-row">
+      <!-- Articles principaux -->
+      <main class="flex-1">
+        {
+          sortedPosts.length > 0 ? (
+            <div class="space-y-8">
+              {sortedPosts.map((post) => (
+                <BlogCard post={post} />
+              ))}
+            </div>
+          ) : (
+            <div class="py-16 text-center">
+              <div class="mx-auto mb-4 w-fit rounded-full bg-white/5 p-6">
+                <svg
+                  class="h-16 w-16 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  />
+                </svg>
+              </div>
+              <p class="text-lg text-gray-400">Aucun article disponible pour le moment.</p>
+            </div>
+          )
+        }
+      </main>
+
+      <!-- Sidebar -->
+      <aside class="w-full lg:w-80">
+        <div class="sticky top-8 space-y-8">
+          <!-- Filtres par catégorie -->
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+            <h3 class="mb-4 text-lg font-semibold text-white">Catégories</h3>
+            <div class="space-y-2">
+              <button
+                class="category-filter active w-full rounded-lg px-4 py-2 text-left text-sm font-medium transition-colors hover:bg-white/10"
+                data-category="all"
+              >
+                <span class="text-white">Tous les articles</span>
+                <span class="float-right text-gray-400">{sortedPosts.length}</span>
+              </button>
+              {
+                categories.map((cat) => {
+                  const count = sortedPosts.filter((p) => p.data.category === cat.id).length;
+                  return count > 0 ? (
+                    <button
+                      class="category-filter w-full rounded-lg px-4 py-2 text-left text-sm font-medium text-gray-400 transition-colors hover:bg-white/10 hover:text-white"
+                      data-category={cat.id}
+                    >
+                      {cat.label}
+                      <span class="float-right">{count}</span>
+                    </button>
+                  ) : null;
+                })
+              }
+            </div>
+          </div>
+
+          <!-- Tags populaires -->
+          <div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+            <h3 class="mb-4 text-lg font-semibold text-white">Tags</h3>
+            <div class="flex flex-wrap gap-2">
+              {
+                allTags.map((tag) => (
+                  <button
+                    class="tag-filter rounded-lg bg-white/5 px-3 py-1.5 text-sm text-gray-300 transition-colors hover:bg-white/10 hover:text-white"
+                    data-tag={tag}
+                  >
+                    #{tag}
+                  </button>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // Filtrage par catégorie
+  const categoryButtons = document.querySelectorAll(".category-filter");
+  const articles = document.querySelectorAll(".blog-article");
+
+  categoryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const category = button.getAttribute("data-category");
+
+      // Mettre à jour l'état actif
+      categoryButtons.forEach((btn) => btn.classList.remove("active", "bg-white/10", "text-white"));
+      button.classList.add("active", "bg-white/10", "text-white");
+
+      // Filtrer les articles
+      articles.forEach((article) => {
+        const articleCategory = article.getAttribute("data-category");
+        if (category === "all" || articleCategory === category) {
+          article.classList.remove("hidden");
+        } else {
+          article.classList.add("hidden");
+        }
+      });
+    });
+  });
+
+  // Filtrage par tag
+  const tagButtons = document.querySelectorAll(".tag-filter");
+
+  tagButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const tag = button.getAttribute("data-tag");
+
+      // Toggle état actif du tag
+      button.classList.toggle("bg-blue-500/20");
+      button.classList.toggle("text-blue-400");
+
+      // Récupérer tous les tags actifs
+      const activeTags = Array.from(document.querySelectorAll(".tag-filter.bg-blue-500\\/20")).map(
+        (btn) => btn.getAttribute("data-tag")
+      );
+
+      // Filtrer les articles
+      articles.forEach((article) => {
+        const articleTags = article.getAttribute("data-tags")?.split(",") || [];
+
+        if (activeTags.length === 0 || activeTags.some((t) => articleTags.includes(t))) {
+          article.classList.remove("hidden");
+        } else {
+          article.classList.add("hidden");
+        }
+      });
+    });
+  });
+</script>
