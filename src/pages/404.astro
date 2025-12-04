@@ -1,6 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
-import { Button } from "@ui/Button";
+import Link from "@ui/Link.astro";
 ---
 
 <BaseLayout>
@@ -57,7 +57,7 @@ import { Button } from "@ui/Button";
 
       <!-- CTA Buttons -->
       <div data-error-cta class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <Button client:load variant="primary" href="/"> Retour à l'accueil </Button>
+        <Link variant="primary" href="/"> Retour à l'accueil </Link>
       </div>
 
       <!-- Floating particles -->

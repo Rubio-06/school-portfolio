@@ -1,6 +1,6 @@
 ---
 import { heroConfig } from "@config/hero";
-import { Button } from "@ui/Button";
+import Link from "@ui/Link.astro";
 ---
 
 <section
@@ -39,14 +39,17 @@ import { Button } from "@ui/Button";
       </div>
 
       <!-- CTA Buttons -->
-      <div data-hero-cta class="flex flex-col items-center justify-center gap-4 sm:flex-row">
-        <Button client:load variant="primary" href={heroConfig.cta.primary.href}>
+      <div
+        data-hero-cta
+        class="relative z-20 flex flex-col items-center justify-center gap-4 sm:flex-row"
+      >
+        <Link variant="primary" href={heroConfig.cta.primary.href}>
           {heroConfig.cta.primary.text}
-        </Button>
+        </Link>
 
-        <Button client:load variant="secondary" href={heroConfig.cta.secondary.href}>
+        <Link variant="secondary" href={heroConfig.cta.secondary.href}>
           {heroConfig.cta.secondary.text}
-        </Button>
+        </Link>
       </div>
 
       <!-- Scroll indicator -->

@@ -1,14 +1,15 @@
-import { type ReactNode, type AnchorHTMLAttributes } from "react";
+import { type ReactNode, type ButtonHTMLAttributes } from "react";
 import { gsap } from "gsap";
 
 export type ButtonVariant = "primary" | "secondary" | "ghost";
 export type ButtonSize = "sm" | "md" | "lg";
 
-export interface ButtonProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   children: ReactNode;
-  href: string;
+  icon?: ReactNode;
+  iconPosition?: "left" | "right";
 }
 
 const variantClasses: Record<ButtonVariant, string> = {
@@ -29,11 +30,13 @@ export function Button({
   variant = "primary",
   size = "md",
   children,
-  href,
+  icon,
+  iconPosition = "left",
   className = "",
+  onClick,
   ...props
 }: ButtonProps) {
-  const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseEnter = (e: React.MouseEvent<HTMLButtonElement>) => {
     gsap.to(e.currentTarget, {
       scale: 1.05,
       duration: 0.3,
@@ -41,7 +44,7 @@ export function Button({
     });
   };
 
-  const handleMouseLeave = (e: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement>) => {
     gsap.to(e.currentTarget, {
       scale: 1,
       duration: 0.3,
@@ -50,20 +53,30 @@ export function Button({
   };
 
   return (
-    <a
-      href={href}
-      className={`${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
+    <button
+      className={`inline-flex items-center justify-center gap-2 ${variantClasses[variant]} ${sizeClasses[size]} ${className}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onClick={onClick}
       {...props}
     >
       {variant === "primary" && (
         <>
-          <span className="relative z-10">{children}</span>
+          <span className="relative z-10 flex items-center gap-2">
+            {icon && iconPosition === "left" && <span className="flex-shrink-0">{icon}</span>}
+            {children}
+            {icon && iconPosition === "right" && <span className="flex-shrink-0">{icon}</span>}
+          </span>
           <div className="absolute inset-0 -z-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
         </>
       )}
-      {variant !== "primary" && children}
-    </a>
+      {variant !== "primary" && (
+        <>
+          {icon && iconPosition === "left" && <span className="flex-shrink-0">{icon}</span>}
+          {children}
+          {icon && iconPosition === "right" && <span className="flex-shrink-0">{icon}</span>}
+        </>
+      )}
+    </button>
   );
 }

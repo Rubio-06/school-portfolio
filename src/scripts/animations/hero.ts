@@ -46,11 +46,15 @@ export function initHeroAnimations() {
   );
 
   // CTA buttons animation
-  tl.from(
+  tl.fromTo(
     "[data-hero-cta] > *",
     {
       y: 30,
       opacity: 0,
+    },
+    {
+      y: 0,
+      opacity: 1,
       duration: 0.8,
       stagger: 0.2,
     },
