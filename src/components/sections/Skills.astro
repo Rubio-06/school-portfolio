@@ -1,6 +1,7 @@
 ---
 import { skillsConfig } from "@config/skills";
 import { Image } from "astro:assets";
+import Title from "@ui/Title.astro";
 
 // Calculer l'expérience pour chaque skill
 const currentYear = 2025;
@@ -20,13 +21,8 @@ const groupedSkills = skillsConfig.categories.map((category) => ({
 <section id="skills" data-skills-section class="relative px-8 py-20">
   <div class="container mx-auto max-w-7xl">
     <!-- Section Title -->
-    <div data-skills-header class="mb-16 text-center">
-      <h2
-        class="mb-4 bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-4xl font-bold text-transparent md:text-5xl lg:text-6xl"
-      >
-        Compétences
-      </h2>
-      <p class="text-lg text-gray-400 md:text-xl">Technologies et outils que je maîtrise</p>
+    <div data-skills-header>
+      <Title highlight="Compétences" subtitle="Technologies et outils que je maîtrise" />
     </div>
 
     <!-- Skills Grid -->

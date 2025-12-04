@@ -5,3 +5,4 @@ export * from "./skills";
 export * from "./error404";
 export * from "./about";
 export * from "./experience";
+export * from "./school";

@@ -6,6 +6,7 @@
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/components/layouts/*"],
+      "@sections/*": ["src/components/sections/*"],
       "@shared/*": ["src/components/shared/*"],
       "@ui/*": ["src/components/ui/*"],
       "@core/*": ["src/core/*"],
