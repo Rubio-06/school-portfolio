@@ -1,0 +1,77 @@
+---
+// Composant ScrollToTop
+---
+
+<button
+  data-scroll-to-top
+  class="pointer-events-none fixed right-8 bottom-8 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-blue-500 to-purple-500 text-white opacity-0 shadow-lg shadow-blue-500/30 transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-blue-500/50"
+  aria-label="Retour en haut"
+>
+  <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+  </svg>
+</button>
+
+<script>
+  import { gsap } from "gsap";
+
+  function initScrollToTop() {
+    const button = document.querySelector("[data-scroll-to-top]");
+    if (!button) return;
+
+    let isVisible = false;
+
+    // Gérer l'affichage du bouton au scroll
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const shouldShow = scrollPosition > 300;
+
+      if (shouldShow && !isVisible) {
+        isVisible = true;
+        gsap.to(button, {
+          opacity: 1,
+          pointerEvents: "auto",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      } else if (!shouldShow && isVisible) {
+        isVisible = false;
+        gsap.to(button, {
+          opacity: 0,
+          pointerEvents: "none",
+          duration: 0.3,
+          ease: "power2.out",
+        });
+      }
+    };
+
+    // Gérer le clic sur le bouton
+    button.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+
+    // Écouter le scroll
+    window.addEventListener("scroll", handleScroll);
+
+    // Animation de pulsation subtile
+    gsap.to(button, {
+      scale: 1.05,
+      duration: 1.5,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
+  }
+
+  // Initialiser au chargement de la page
+  document.addEventListener("astro:page-load", () => {
+    initScrollToTop();
+  });
+</script>

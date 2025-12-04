@@ -4,7 +4,7 @@ export const heroConfig: HeroConfig = {
   greeting: "Hello, World! 💻",
   name: "Rubio Abela",
   tagline: "Développeur en alternance",
-  animatedTexts: ["Étudiant BTS SIO", "Développeur Web", "Alternant passionné"],
+  animatedTexts: ["Étudiant en BTS SIO", "Apprenant motivé"],
   cta: {
     primary: {
       text: "Voir mes projets",
