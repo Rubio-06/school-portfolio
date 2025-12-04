@@ -1,0 +1,182 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@components/layouts/BaseLayout.astro";
+import ProjectCard from "@components/ui/ProjectCard.astro";
+import Title from "@components/ui/Title.astro";
+
+// Récupérer tous les projets
+const allProjects = await getCollection("projects");
+
+// Trier par date (plus récent en premier)
+const sortedProjects = allProjects.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+// Grouper par catégorie
+const projectsByCategory = {
+  scolaire: sortedProjects.filter((p) => p.data.category === "scolaire"),
+  personnel: sortedProjects.filter((p) => p.data.category === "personnel"),
+};
+
+const categoryLabels = {
+  scolaire: "Projets Scolaires",
+  personnel: "Projets Personnels",
+};
+
+const categoryDescriptions = {
+  scolaire: "Projets réalisés dans le cadre de ma formation académique",
+  personnel: "Projets personnels et expérimentations techniques",
+};
+
+const categoryGradients = {
+  scolaire: "from-blue-500/20 to-blue-600/10",
+  personnel: "from-purple-500/20 to-purple-600/10",
+};
+
+const categoryTextColors = {
+  scolaire: "text-blue-400",
+  personnel: "text-purple-400",
+};
+---
+
+<BaseLayout>
+  <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+    <!-- En-tête -->
+    <header class="mb-16">
+      <Title
+        highlight="Tous mes projets"
+        subtitle="Découvrez l'ensemble de mes réalisations, des projets académiques aux développements professionnels, en passant par mes expérimentations personnelles."
+      />
+    </header>
+
+    <!-- Statistiques -->
+    <div class="mb-16 grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div
+        class="group rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-500/10 to-blue-600/5 p-8 text-center backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-blue-500/40"
+      >
+        <div
+          class="mb-3 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-5xl font-bold text-transparent"
+        >
+          {projectsByCategory.scolaire.length}
+        </div>
+        <div class="text-sm font-medium text-blue-300">Projets Scolaires</div>
+      </div>
+      <div
+        class="group rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-purple-600/5 p-8 text-center backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-purple-500/40"
+      >
+        <div
+          class="mb-3 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-5xl font-bold text-transparent"
+        >
+          {projectsByCategory.personnel.length}
+        </div>
+        <div class="text-sm font-medium text-purple-300">Projets Personnels</div>
+      </div>
+    </div>
+
+    <!-- Filtres -->
+    <div class="mb-12 flex flex-wrap justify-center gap-3">
+      <button
+        class="filter-btn active rounded-full bg-gradient-to-r from-blue-500 to-purple-500 px-6 py-3 font-semibold text-white shadow-lg shadow-blue-500/30 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/50"
+        data-filter="all"
+      >
+        Tous
+      </button>
+      <button
+        class="filter-btn rounded-full border-2 border-white/20 bg-white/5 px-6 py-3 font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white/40 hover:bg-white/10"
+        data-filter="scolaire"
+      >
+        Scolaire
+      </button>
+      <button
+        class="filter-btn rounded-full border-2 border-white/20 bg-white/5 px-6 py-3 font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white/40 hover:bg-white/10"
+        data-filter="personnel"
+      >
+        Personnel
+      </button>
+    </div>
+
+    <!-- Projets par catégorie -->
+    {
+      Object.entries(projectsByCategory).map(([category, projects]) => (
+        <section class={`category-section mb-20 ${category}`} data-category={category}>
+          <div class="mb-8 flex items-center gap-4">
+            <div
+              class={`h-1 w-16 rounded-full bg-gradient-to-r ${categoryGradients[category as keyof typeof categoryGradients]}`}
+            />
+            <div>
+              <h2
+                class={`text-3xl font-bold ${categoryTextColors[category as keyof typeof categoryTextColors]}`}
+              >
+                {categoryLabels[category as keyof typeof categoryLabels]}
+              </h2>
+              <p class="mt-1 text-sm text-gray-400">
+                {categoryDescriptions[category as keyof typeof categoryDescriptions]}
+              </p>
+            </div>
+          </div>
+          {projects.length > 0 ? (
+            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+              {projects.map((project) => (
+                <ProjectCard project={project} />
+              ))}
+            </div>
+          ) : (
+            <div class="py-12 text-center">
+              <div class="mx-auto mb-4 w-fit rounded-full bg-white/5 p-6">
+                <svg
+                  class="h-12 w-12 text-gray-600"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+                  />
+                </svg>
+              </div>
+              <p class="text-lg text-gray-400">
+                Aucun projet {categoryLabels[category as keyof typeof categoryLabels].toLowerCase()}{" "}
+                pour le moment.
+              </p>
+            </div>
+          )}
+        </section>
+      ))
+    }
+
+    {
+      sortedProjects.length === 0 && (
+        <div class="py-16 text-center">
+          <div class="mx-auto mb-4 w-fit rounded-full bg-white/5 p-6">
+            <svg
+              class="h-16 w-16 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+              />
+            </svg>
+          </div>
+          <p class="text-lg text-gray-400">Aucun projet disponible pour le moment.</p>
+          <p class="mt-2 text-sm text-gray-500">
+            Revenez bientôt pour découvrir mes réalisations !
+          </p>
+        </div>
+      )
+    }
+  </div>
+</BaseLayout>
+
+<script>
+  import { initProjectFilters } from "@/scripts";
+
+  document.addEventListener("astro:page-load", () => {
+    initProjectFilters();
+  });
+</script>

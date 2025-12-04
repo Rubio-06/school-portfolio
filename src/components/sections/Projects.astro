@@ -1,0 +1,53 @@
+---
+import { getCollection } from "astro:content";
+import ProjectCard from "@components/ui/ProjectCard.astro";
+import Title from "@components/ui/Title.astro";
+import Link from "@components/ui/Link.astro";
+
+// Récupérer les projets mis en avant (featured)
+const featuredProjects = await getCollection("projects", ({ data }) => {
+  return data.featured === true;
+});
+
+// Trier par ordre et prendre les 3 premiers
+const displayedProjects = featuredProjects
+  .sort((a, b) => (a.data.order || 999) - (b.data.order || 999))
+  .slice(0, 3);
+---
+
+<section id="projects" class="px-4 py-20 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-7xl">
+    <!-- En-tête de section -->
+    <Title
+      highlight="Projets"
+      subtitle="Découvrez une sélection de mes projets les plus significatifs, allant de réalisations scolaires à des projets professionnels."
+    />
+
+    <!-- Grille de projets -->
+    {
+      displayedProjects.length > 0 ? (
+        <div class="mb-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {displayedProjects.map((project) => (
+            <ProjectCard project={project} />
+          ))}
+        </div>
+      ) : (
+        <p class="mb-12 text-center text-gray-400">Aucun projet mis en avant pour le moment.</p>
+      )
+    }
+
+    <!-- Bouton voir tous les projets -->
+    <div class="text-center">
+      <Link href="/projects" variant="primary" size="md">
+        Voir tous les projets
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+      </Link>
+    </div>
+  </div>
+</section>
