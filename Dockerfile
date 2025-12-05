@@ -11,12 +11,13 @@ RUN pnpm install
 COPY . .
 RUN pnpm build
 
-# Étape 2 : Production avec image officielle Astro
-FROM ghcr.io/withastro/astro:latest
+# Étape 2 : Serveur NGINX pour les fichiers Astro
+FROM nginx:alpine
 
-WORKDIR /app
+# Copie du build vers le dossier servi par NGINX
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-COPY --from=builder /app/dist ./dist
+# Expose port 80 pour Traefik
+EXPOSE 80
 
-EXPOSE 3000
-CMD ["astro", "preview", "--host", "0.0.0.0", "--port", "3000"]
+CMD ["nginx", "-g", "daemon off;"]
