@@ -31,12 +31,11 @@ const categories = [
 >
   <div class="container mx-auto px-4 py-16">
     <!-- En-tête -->
-    <div class="mb-16">
-      <Title subtitle="Ma veille technologique" title="Blog" />
-      <p class="mt-6 max-w-2xl text-xl text-gray-400">
-        Articles et réflexions sur Astro et l'écosystème web moderne
-      </p>
-    </div>
+    <Title
+      highlight="Ma veille technologique"
+      subtitle="Articles et réflexions sur Astro et l'écosystème web modern"
+      title="Blog"
+    />
 
     <div class="flex flex-col gap-12 lg:flex-row">
       <!-- Articles principaux -->
@@ -125,56 +124,9 @@ const categories = [
 </BaseLayout>
 
 <script>
-  // Filtrage par catégorie
-  const categoryButtons = document.querySelectorAll(".category-filter");
-  const articles = document.querySelectorAll(".blog-article");
+  import { initBlogFilters } from "@/scripts/blog";
 
-  categoryButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const category = button.getAttribute("data-category");
-
-      // Mettre à jour l'état actif
-      categoryButtons.forEach((btn) => btn.classList.remove("active", "bg-white/10", "text-white"));
-      button.classList.add("active", "bg-white/10", "text-white");
-
-      // Filtrer les articles
-      articles.forEach((article) => {
-        const articleCategory = article.getAttribute("data-category");
-        if (category === "all" || articleCategory === category) {
-          article.classList.remove("hidden");
-        } else {
-          article.classList.add("hidden");
-        }
-      });
-    });
-  });
-
-  // Filtrage par tag
-  const tagButtons = document.querySelectorAll(".tag-filter");
-
-  tagButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      const tag = button.getAttribute("data-tag");
-
-      // Toggle état actif du tag
-      button.classList.toggle("bg-blue-500/20");
-      button.classList.toggle("text-blue-400");
-
-      // Récupérer tous les tags actifs
-      const activeTags = Array.from(document.querySelectorAll(".tag-filter.bg-blue-500\\/20")).map(
-        (btn) => btn.getAttribute("data-tag")
-      );
-
-      // Filtrer les articles
-      articles.forEach((article) => {
-        const articleTags = article.getAttribute("data-tags")?.split(",") || [];
-
-        if (activeTags.length === 0 || activeTags.some((t) => articleTags.includes(t))) {
-          article.classList.remove("hidden");
-        } else {
-          article.classList.add("hidden");
-        }
-      });
-    });
+  document.addEventListener("astro:page-load", () => {
+    initBlogFilters();
   });
 </script>
