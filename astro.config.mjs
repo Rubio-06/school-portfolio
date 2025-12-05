@@ -7,9 +7,11 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// https://astro.build/config
 export default defineConfig({
+  site: "https://www.rubio-abela.fr",
+
   integrations: [react()],
+
   vite: {
     plugins: [tailwindcss()],
     resolve: {
@@ -31,9 +33,10 @@ export default defineConfig({
       },
     },
   },
+
   image: {
     service: {
-      entrypoint: "astro/assets/services/sharp",
+      entrypoint: "astro/assets/services/noop",
     },
   },
 });
