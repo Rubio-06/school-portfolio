@@ -17,4 +17,8 @@ export type SkillsConfig = {
     label: string;
     color: string;
   }[];
+  table?: {
+    available: boolean;
+    url?: string;
+  };
 };
