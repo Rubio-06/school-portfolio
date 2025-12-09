@@ -1,0 +1,148 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Heading from "@ui/Heading.astro";
+import { aboutConfig } from "@config/about";
+---
+
+<BaseLayout>
+  <section class="relative min-h-screen px-8 py-20">
+    <div class="container mx-auto max-w-4xl">
+      <div class="mb-12">
+        <Heading
+          title="Politique de Confidentialité"
+          subtitle="Protection de vos données personnelles"
+        />
+      </div>
+
+      <div class="space-y-8 text-gray-300">
+        <!-- Introduction -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Introduction</h2>
+          <p class="text-sm leading-relaxed">
+            Cette politique de confidentialité explique comment vos données personnelles sont
+            collectées et traitées lorsque vous utilisez le formulaire de contact de ce site.
+          </p>
+        </div>
+
+        <!-- Données collectées -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Données collectées</h2>
+          <p class="mb-4 text-sm leading-relaxed">
+            Nous collectons uniquement les informations que vous nous fournissez via le formulaire
+            de contact :
+          </p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="mt-1 text-blue-400">•</span>
+              <span
+                ><span class="font-semibold text-white">Prénom</span> - pour vous identifier</span
+              >
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-1 text-blue-400">•</span>
+              <span><span class="font-semibold text-white">Nom</span> - pour vous identifier</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-1 text-blue-400">•</span>
+              <span><span class="font-semibold text-white">Email</span> - pour vous répondre</span>
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-1 text-blue-400">•</span>
+              <span
+                ><span class="font-semibold text-white">Message</span> - le contenu de votre demande</span
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Finalité -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Finalité du traitement</h2>
+          <p class="text-sm leading-relaxed">
+            Vos données sont utilisées <span class="font-semibold text-white">uniquement</span> pour répondre
+            à votre demande de contact. Elles ne sont jamais partagées avec des tiers ni utilisées à des
+            fins commerciales ou marketing.
+          </p>
+        </div>
+
+        <!-- Durée de conservation -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Durée de conservation</h2>
+          <p class="text-sm leading-relaxed">
+            Vos données sont conservées pendant la durée nécessaire au traitement de votre demande,
+            puis supprimées. Aucune donnée n'est conservée de manière permanente sans votre
+            consentement explicite.
+          </p>
+        </div>
+
+        <!-- Vos droits -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Vos droits RGPD</h2>
+          <p class="mb-4 text-sm leading-relaxed">
+            Conformément au RGPD, vous disposez des droits suivants :
+          </p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-start gap-2">
+              <span class="mt-1 text-blue-400">•</span>
+              <span
+                ><span class="font-semibold text-white">Droit d'accès</span> - consulter vos données</span
+              >
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-1 text-blue-400">•</span>
+              <span
+                ><span class="font-semibold text-white">Droit de rectification</span> - corriger vos données</span
+              >
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-1 text-blue-400">•</span>
+              <span
+                ><span class="font-semibold text-white">Droit à l'effacement</span> - supprimer vos données</span
+              >
+            </li>
+            <li class="flex items-start gap-2">
+              <span class="mt-1 text-blue-400">•</span>
+              <span
+                ><span class="font-semibold text-white">Droit d'opposition</span> - refuser le traitement</span
+              >
+            </li>
+          </ul>
+          <p class="mt-4 text-sm leading-relaxed">
+            Pour exercer ces droits, contactez-nous à : <a
+              href={`mailto:${aboutConfig.email}`}
+              class="text-blue-400 hover:underline">{aboutConfig.email}</a
+            >
+          </p>
+        </div>
+
+        <!-- Sécurité -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Sécurité</h2>
+          <p class="text-sm leading-relaxed">
+            Nous mettons en œuvre des mesures de sécurité techniques et organisationnelles
+            appropriées pour protéger vos données contre tout accès non autorisé, perte ou
+            altération.
+          </p>
+        </div>
+
+        <!-- Cookies et tracking -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Cookies et tracking</h2>
+          <p class="text-sm leading-relaxed">
+            Ce site n'utilise <span class="font-semibold text-white">aucun cookie de tracking</span
+            >, aucun outil d'analyse, et aucune publicité. Votre navigation est entièrement privée.
+          </p>
+        </div>
+
+        <!-- Modifications -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Modifications</h2>
+          <p class="text-sm leading-relaxed">
+            Cette politique peut être mise à jour. La version en vigueur est toujours disponible sur
+            cette page. Dernière mise à jour : Décembre 2025.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
