@@ -17,6 +17,9 @@ FROM nginx:alpine
 # Copie du build vers le dossier servi par NGINX
 COPY --from=builder /app/dist /usr/share/nginx/html
 
+# Copie de la configuration NGINX personnalisée
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
 # Expose port 80 pour Traefik
 EXPOSE 80
 
