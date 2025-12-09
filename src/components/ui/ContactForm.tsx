@@ -16,7 +16,7 @@ export function ContactForm() {
     formState: { errors },
     reset,
   } = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
+    resolver: zodResolver(contactSchema as any),
     mode: "onChange", // Validation en temps réel à chaque changement
   });
 
