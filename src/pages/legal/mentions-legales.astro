@@ -1,0 +1,99 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Heading from "@ui/Heading.astro";
+import { aboutConfig } from "@config/about";
+---
+
+<BaseLayout>
+  <section class="relative min-h-screen px-8 py-20">
+    <div class="container mx-auto max-w-4xl">
+      <div class="mb-12">
+        <Heading title="Mentions Légales" subtitle="Informations légales et éditoriales" />
+      </div>
+
+      <div class="space-y-8 text-gray-300">
+        <!-- Éditeur -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Éditeur du site</h2>
+          <div class="space-y-2 text-sm">
+            <p>
+              <span class="font-semibold text-white">Nom :</span>
+              {aboutConfig.firstName}
+              {aboutConfig.lastName}
+            </p>
+            <p>
+              <span class="font-semibold text-white">Email :</span>
+              <a href={`mailto:${aboutConfig.email}`} class="text-blue-400 hover:underline"
+                >{aboutConfig.email}</a>
+            </p>
+            <p>
+              <span class="font-semibold text-white">Localisation :</span>
+              {aboutConfig.location}
+            </p>
+          </div>
+        </div>
+
+        <!-- Hébergement -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Hébergement</h2>
+          <div class="space-y-2 text-sm">
+            <p><span class="font-semibold text-white">Hébergeur :</span> OVH SAS</p>
+            <p>
+              <span class="font-semibold text-white">Adresse :</span> 2 rue Kellermann, 59100 Roubaix,
+              France
+            </p>
+            <p>
+              <span class="font-semibold text-white">Site web :</span>
+              <a
+                href="https://www.ovhcloud.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-blue-400 hover:underline">ovhcloud.com</a>
+            </p>
+            <p><span class="font-semibold text-white">Type :</span> VPS dédié</p>
+          </div>
+        </div>
+
+        <!-- Propriété intellectuelle -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Propriété intellectuelle</h2>
+          <p class="text-sm leading-relaxed">
+            L'ensemble du contenu de ce site (textes, images, code source) est la propriété
+            exclusive de {aboutConfig.firstName}
+            {aboutConfig.lastName}. Toute reproduction, totale ou partielle, sans autorisation
+            préalable est interdite.
+          </p>
+        </div>
+
+        <!-- Technologies -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Technologies utilisées</h2>
+          <p class="text-sm leading-relaxed">
+            Ce site est développé avec Astro, un framework web moderne. Le code source est
+            disponible sur GitHub.
+          </p>
+        </div>
+
+        <!-- Cookies -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Cookies</h2>
+          <p class="text-sm leading-relaxed">
+            Ce site n'utilise pas de cookies de tracking ou de publicité. Seuls les cookies
+            techniques essentiels au fonctionnement peuvent être utilisés.
+          </p>
+        </div>
+
+        <!-- Contact -->
+        <div class="rounded-lg border border-white/10 bg-white/5 p-6 backdrop-blur-sm">
+          <h2 class="mb-4 text-xl font-bold text-white">Contact</h2>
+          <p class="text-sm leading-relaxed">
+            Pour toute question concernant ces mentions légales, contactez-nous à : <a
+              href={`mailto:${aboutConfig.email}`}
+              class="text-blue-400 hover:underline">{aboutConfig.email}</a
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

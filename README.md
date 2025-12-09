@@ -1,43 +1,127 @@
-# Astro Starter Kit: Minimal
+# 🎓 Portfolio BTS SIO
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+Portfolio professionnel développé dans le cadre de ma formation en BTS SIO (Services Informatiques aux Organisations), option SLAM. Ce site présente mes projets, compétences et parcours académique.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## ✨ Fonctionnalités
 
-## 🚀 Project Structure
+- 🎨 **Design moderne** : Interface avec glassmorphism et animations fluides
+- 📱 **Responsive** : Optimisé pour tous les appareils
+- 🚀 **Performances** : Site statique généré avec Astro pour une vitesse optimale
+- 📝 **Gestion de contenu** : Système de collections Astro pour les projets
+- 🎭 **Animations** : Interactions dynamiques avec GSAP
+- 🎯 **Sections principales** :
+  - Présentation et compétences
+  - Projets (avec filtres par catégorie)
+  - Parcours scolaire et professionnel
+  - Expériences et formations
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🛠️ Technologies
+
+- **Framework** : [Astro 5](https://astro.build) - Générateur de sites statiques
+- **Styling** : [TailwindCSS 4](https://tailwindcss.com) - Framework CSS utility-first
+- **Animations** : [GSAP 3](https://greensock.com/gsap/) - Bibliothèque d'animations
+- **UI** : React 19 (pour les composants interactifs)
+- **TypeScript** : Typage fort pour une meilleure maintenabilité
+- **Markdown** : Gestion de contenu avec frontmatter
+
+## 📁 Structure du projet
 
 ```text
 /
-├── public/
+├── public/                    # Assets statiques
+│   └── icons/                # Icônes et images
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── components/
+│   │   ├── layouts/          # Layouts de page
+│   │   ├── sections/         # Sections de la page d'accueil
+│   │   ├── shared/           # Composants partagés
+│   │   └── ui/               # Composants UI réutilisables
+│   ├── content/
+│   │   ├── config.ts         # Configuration des collections
+│   │   └── projects/         # Fichiers markdown des projets
+│   ├── core/
+│   │   ├── config/           # Configuration du contenu
+│   │   └── types/            # Types TypeScript
+│   ├── pages/
+│   │   ├── index.astro       # Page d'accueil
+│   │   ├── projects/         # Pages des projets
+│   │   └── 404.astro         # Page d'erreur
+│   ├── scripts/              # Scripts et animations
+│   ├── styles/               # Styles globaux
+│   └── utils/                # Fonctions utilitaires
+├── astro.config.mjs          # Configuration Astro
+├── tailwind.config.js        # Configuration TailwindCSS
+└── tsconfig.json             # Configuration TypeScript
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 🚀 Commandes
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Toutes les commandes sont exécutées depuis la racine du projet :
 
-Any static assets, like images, can be placed in the `public/` directory.
+| Commande        | Action                                             |
+| :-------------- | :------------------------------------------------- |
+| `pnpm install`  | Installe les dépendances                           |
+| `pnpm dev`      | Lance le serveur de développement (localhost:4321) |
+| `pnpm build`    | Génère le site de production dans `./dist/`        |
+| `pnpm preview`  | Prévisualise la version de production              |
+| `pnpm lint`     | Vérifie le code avec ESLint                        |
+| `pnpm lint:fix` | Corrige automatiquement les erreurs ESLint         |
+| `pnpm format`   | Formate le code avec Prettier                      |
 
-## 🧞 Commands
+## 📝 Gestion des projets
 
-All commands are run from the root of the project, from a terminal:
+Les projets sont gérés via le système de collections Astro. Pour ajouter un nouveau projet :
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+1. Créez un fichier `.md` dans `src/content/projects/`
+2. Ajoutez le frontmatter avec les informations du projet :
 
-## 👀 Want to learn more?
+```markdown
+---
+title: "Titre du projet"
+description: "Description courte"
+category: "scolaire" # ou "personnel"
+technologies: ["React", "TypeScript", "TailwindCSS"]
+image: "/path/to/image.jpg"
+github: "https://github.com/..."
+demo: "https://demo.com"
+date: "2024-01-15"
+featured: true
+order: 1
+---
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Contenu du projet
+
+Votre description détaillée ici...
+```
+
+## 🎨 Personnalisation
+
+### Modifier les informations personnelles
+
+Les configurations se trouvent dans `src/core/config/` :
+
+- `hero.ts` : Textes animés et présentation
+- `about.ts` : Section à propos
+- `skills.ts` : Compétences techniques
+- `experience.ts` : Parcours professionnel
+- `school.ts` : Formations
+- `social.ts` : Liens réseaux sociaux
+
+### Styles
+
+- **Globaux** : `src/styles/global.css`
+- **TailwindCSS** : Configuration dans `tailwind.config.js`
+- **Composants** : Styles inline avec TailwindCSS
+
+## 📄 Licence
+
+Ce projet est à usage personnel dans le cadre de ma formation BTS SIO.
+
+## 👤 Auteur
+
+Étudiant en BTS SIO - SLAM
+ABELA RUBIO
+
+---
+
+Développé avec 💙 en utilisant Astro, TailwindCSS et GSAP
