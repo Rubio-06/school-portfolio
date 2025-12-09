@@ -1,0 +1,39 @@
+---
+import Title from "@ui/Title.astro";
+import { ContactForm } from "@ui/ContactForm";
+---
+
+<section id="contact" class="relative px-8 py-20">
+  <div class="container mx-auto max-w-3xl">
+    <Title highlight="Me contacter" subtitle="Une question ? Un projet ?" />
+
+    <div class="space-y-6">
+      <!-- Formulaire de contact -->
+      <div class="rounded-lg border border-white/10 bg-white/5 p-8 backdrop-blur-sm">
+        <ContactForm client:load />
+      </div>
+
+      <!-- Note RGPD -->
+      <div class="rounded-lg border border-blue-500/20 bg-blue-500/5 p-6 backdrop-blur-sm">
+        <div class="flex items-start gap-3">
+          <svg class="h-5 w-5 flex-shrink-0 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+            <path
+              fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+              clip-rule="evenodd"></path>
+          </svg>
+          <div class="text-sm text-gray-300">
+            <p class="mb-2 font-semibold text-white">Vos données sont protégées</p>
+            <p class="leading-relaxed">
+              Les informations collectées via ce formulaire sont utilisées uniquement pour répondre
+              à votre demande. Consultez notre <a
+                href="/legal/politique-confidentialite"
+                class="text-blue-400 hover:underline">politique de confidentialité</a
+              >.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
