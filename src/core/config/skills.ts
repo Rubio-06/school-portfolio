@@ -9,6 +9,10 @@ export const skillsConfig: SkillsConfig = {
     { id: "tools", label: "Outils & DevOps", color: "from-pink-500 to-rose-500" },
     { id: "design", label: "Design", color: "from-yellow-500 to-amber-500" },
   ],
+  table: {
+    available: true,
+    url: "/doc/skills-table-rubio-abela.pdf",
+  },
   skills: [
     // Frontend
     {

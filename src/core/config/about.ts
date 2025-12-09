@@ -36,6 +36,6 @@ export const aboutConfig: AboutConfig = {
   ],
   cv: {
     available: true,
-    url: "/cv.pdf",
+    url: "/doc/cv-rubio-abela.pdf",
   },
 };
