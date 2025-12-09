@@ -32,22 +32,6 @@ export const skillsConfig: SkillsConfig = {
       description: "CSS3, Flexbox, Grid, Animations",
     },
     {
-      name: "JavaScript",
-      category: "frontend",
-      icon: "/icons/javascript.svg",
-      startYear: 2022,
-      level: 4,
-      description: "ES6+, DOM, Async/Await",
-    },
-    {
-      name: "TypeScript",
-      category: "frontend",
-      icon: "/icons/typescript.svg",
-      startYear: 2024,
-      level: 3,
-      description: "Types, Interfaces, Generics",
-    },
-    {
       name: "Tailwind CSS",
       category: "frontend",
       icon: "/icons/tailwind.svg",
@@ -72,6 +56,22 @@ export const skillsConfig: SkillsConfig = {
       description: "SSG, Islands, Intégrations",
     },
     // Languages
+    {
+      name: "JavaScript",
+      category: "languages",
+      icon: "/icons/javascript.svg",
+      startYear: 2022,
+      level: 4,
+      description: "ES6+, DOM, Async/Await",
+    },
+    {
+      name: "TypeScript",
+      category: "languages",
+      icon: "/icons/typescript.svg",
+      startYear: 2024,
+      level: 3,
+      description: "Types, Interfaces, Generics",
+    },
     {
       name: "C#",
       category: "languages",

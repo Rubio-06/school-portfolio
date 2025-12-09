@@ -1,7 +1,7 @@
 ---
 title: "Portfolio BTS SIO"
-description: "Portfolio scolaire réalisé dans le cadre de mon BTS SIO, présentant mes projets, compétences et réalisations. Développé avec Astro, React, TypeScript et TailwindCSS, et enrichi d’animations fluides grâce à GSAP."
-category: "personnel"
+description: "Portfolio scolaire réalisé dans le cadre de mon BTS SIO, présentant mes projets, compétences et réalisations. Développé avec Astro, React, TypeScript et TailwindCSS, et enrichi d'animations fluides grâce à GSAP."
+category: "scolaire"
 technologies: ["Astro", "React", "TypeScript", "TailwindCSS", "GSAP"]
 image: "/images/projects/portfolio.webp"
 github: "https://github.com/Rubio-06/school-portfolio"

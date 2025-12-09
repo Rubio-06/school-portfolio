@@ -47,30 +47,6 @@ const categoryTextColors = {
       />
     </header>
 
-    <!-- Statistiques -->
-    <div class="mb-16 grid grid-cols-1 gap-6 md:grid-cols-2">
-      <div
-        class="group rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-500/10 to-blue-600/5 p-8 text-center backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-blue-500/40"
-      >
-        <div
-          class="mb-3 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-5xl font-bold text-transparent"
-        >
-          {projectsByCategory.scolaire.length}
-        </div>
-        <div class="text-sm font-medium text-blue-300">Projets Scolaires</div>
-      </div>
-      <div
-        class="group rounded-2xl border border-purple-500/20 bg-gradient-to-br from-purple-500/10 to-purple-600/5 p-8 text-center backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-purple-500/40"
-      >
-        <div
-          class="mb-3 bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-5xl font-bold text-transparent"
-        >
-          {projectsByCategory.personnel.length}
-        </div>
-        <div class="text-sm font-medium text-purple-300">Projets Personnels</div>
-      </div>
-    </div>
-
     <!-- Filtres -->
     <div class="mb-12 flex flex-wrap justify-center gap-3">
       <button
